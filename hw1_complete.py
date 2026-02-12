@@ -98,6 +98,13 @@ if __name__ == '__main__':
   train_images = train_images[trn_idxs, :,:,:]
   val_labels = train_labels[val_idxs]
   train_labels = train_labels[trn_idxs]
+  train_labels = train_labels.squeeze()
+  test_labels = test_labels.squeeze()
+  val_labels = val_labels.squeeze()
+  input_shape  = train_images.shape[1:]
+  train_images = train_images / 255.0
+  test_images  = test_images  / 255.0
+  val_images   = val_images   / 255.0
   ########################################
   
   ### Build, compile, and train model 1
@@ -150,14 +157,15 @@ if __name__ == '__main__':
   test_loss, test_acc = model3.evaluate(test_images,  test_labels, verbose=2)
   print('\nTest accuracy:', test_acc)
   model3.summary()
-
+  
   ### Build, compile, and train best model under 50k params
   model50k = build_model50k()
-  model50k.summary()
+  # model50k.summary()
   
   model50k.compile(optimizer='adam',
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
+  
   train_hist = model50k.fit(train_images, train_labels,
     validation_data=(val_images, val_labels),
     epochs=30)

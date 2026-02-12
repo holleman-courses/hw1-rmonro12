@@ -27,7 +27,7 @@ def build_model1():
 
 def build_model2():
   model = tf.keras.Sequential ([
-    Input(shape=32, 32, 3),
+    Input(shape=(32, 32, 3)),
     layers.Conv2D(32, kernel_size=(3, 3), activation='relu', padding='same', strides=(2,2)),
     layers.BatchNormalization(),
     layers.Conv2D(64, kernel_size=(3, 3), activation='relu', padding='same', strides=(2,2)),
@@ -47,7 +47,7 @@ def build_model2():
 
 def build_model3():
   model = tf.keras.Sequential ([
-    Input(shape=32, 32, 3),
+    Input(shape=(32, 32, 3)),
     layers.SeparableConv2D(32, kernel_size=(3, 3), activation='relu', padding='same', strides=(2,2)),
     layers.BatchNormalization(),
     layers.SeparableConv2D(64, kernel_size=(3, 3), activation='relu', padding='same', strides=(2,2)),
@@ -67,7 +67,7 @@ def build_model3():
 
 def build_model50k():
   model = tf.keras.Sequential ([
-    Input(shape=32, 32, 3),
+    Input(shape=(32, 32, 3)),
     layers.Conv2D(32, kernel_size=(3, 3), activation='relu', padding='same', strides=(2,2)),
     layers.BatchNormalization(),
     layers.SeparableConv2D(64, kernel_size=(3, 3), activation='relu', padding='same'),

@@ -12,12 +12,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import image
 
-
-#print(f"TensorFlow Version: {tf.__version__}")
-#print(f"Keras Version: {keras.__version__}")
-
-
-## 
+print(f"TensorFlow Version: {tf.__version__}")
+print(f"Keras Version: {keras.__version__}")
 
 def build_model1():
   model = tf.keras.Sequential ([
@@ -110,29 +106,28 @@ if __name__ == '__main__':
   model1.compile(optimizer='adam',
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
-  '''
+  
   train_hist = model1.fit(train_images, train_labels,
     validation_data=(val_images, val_labels),
     epochs=30)
   model1.save('saved_models/model_1_fcnn')
   test_loss, test_acc = model1.evaluate(test_images,  test_labels, verbose=2)
   print('\nTest accuracy:', test_acc)
-  #model1.summary()
-  '''
+  model1.summary()
 
   ### Build, compile, and train model 2 (DS Convolutions)
   model2 = build_model2()
   model2.compile(optimizer='adam',
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
-  '''
+  
   train_hist = model2.fit(train_images, train_labels,
     validation_data=(val_images, val_labels),
     epochs=30)
   model2.save('saved_models/model_2_conv')
   test_loss, test_acc = model2.evaluate(test_images,  test_labels, verbose=2)
   print('\nTest accuracy:', test_acc)
-  #model2.summary()
+  model2.summary()
   
   test_img = np.array(keras.utils.load_img(
       './hw1-rmonro12/test_image_bird.jpg',
@@ -142,22 +137,20 @@ if __name__ == '__main__':
   loaded_model = tf.keras.models.load_model('saved_models/model_2_conv')
   pred = loaded_model.predict(test_img.reshape(1,32,32,3))
   print(pred)
-  '''
 
   ### Repeat for model 3 and your best sub-50k params model
   model3 = build_model3()
   model3.compile(optimizer='adam',
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
-  '''
+  
   train_hist = model3.fit(train_images, train_labels,
     validation_data=(val_images, val_labels),
     epochs=30)
   model3.save('saved_models/model_3_separable_conv')
   test_loss, test_acc = model3.evaluate(test_images,  test_labels, verbose=2)
   print('\nTest accuracy:', test_acc)
-  #model3.summary()
-  '''
+  model3.summary()
 
   ### Build, compile, and train best model under 50k params
   model50k = build_model50k()
@@ -172,4 +165,3 @@ if __name__ == '__main__':
   model50k.save('saved_models/best_model.h5')
   test_loss, test_acc = model50k.evaluate(test_images,  test_labels, verbose=2)
   print('\nTest accuracy:', test_acc)
-  
